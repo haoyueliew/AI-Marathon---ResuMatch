@@ -182,6 +182,6 @@ Or hold **Ctrl** and click `http://127.0.0.1:5000` directly in the VS Code termi
 
 | Name | 
 |---|
-| [Liew Hao Yue] |
-| [Low Ke Sin] | 
-| [Thor Xiwen] | 
+| Liew Hao Yue |
+| Low Ke Sin | 
+| Thor Xiwen | 
