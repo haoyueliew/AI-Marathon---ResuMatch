@@ -2,11 +2,11 @@
 
 # Problem Statement
 
-![image.png](Images/image.png)
+![image.png](images/image.png)
 
 # Project Structure
 
-![image.png](Images/image%201.png)
+![image 1.png](images/image 1.png)
 
 # User Manual
 
@@ -89,24 +89,24 @@ Or hold on the Ctrl key and click on 'http://127.0.0.1:5000' in vs code terminal
 
 ## How to use this AI job checker
 
-![image.png](Images/image%202.png)
+![image 2.png](images/image 2.png)
 
 1. Press/drop your Resume in this box
 2. After drop the resume, press "analysis resume"
 
-![image.png](Images/image%203.png)
+![image 3.png](images/image 3.png)
 
 1. The user can choose select platform that they wanted to find.
 2. After select completed, user can press "search jobs" into next page
 
-![image.png](Images/image%204.png)
+![image 4.png](images/image 4.png)
 
 1. The jobs found page view show a list of available jobs for application
 2. The user can press "Analyze Match" to check it (will go to the next page)
 
-![image.png](Images/image%205.png)
+![image 5.png](images/image 5.png)
 
-![image.png](Images/image%206.png)
+![image 6.png](images/image 6.png)
 
 1. User can check whether the job is suitable to his/her field
 2. User can read the full report whether the user is match with this job or not
