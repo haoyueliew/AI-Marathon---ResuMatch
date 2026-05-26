@@ -1,108 +1,187 @@
 # ResuMatch — AI-Powered Job Matching System
-### Built for "Build with AI" Hackathon · APU
-Powered by **Chutes.ai** and **Morpheus (mor.org)**
+
+> Upload your resume. Get matched to jobs instantly using Morpheus AI.
+
+Built for the **Build with AI Hackathon (AI Marathon)** · Powered by **Morpheus AI (LLaMA 3.3-70B)**
 
 ---
 
-## What it does
-1. **Upload Resume** — Upload PDF, DOCX, or TXT. AI reads and extracts your profile.
-2. **Profile Identified** — AI detects your major (Software Engineer, Designer, etc.), skills, level, and experience.
-3. **Browse Jobs** — Fetches real jobs from LinkedIn/Indeed (via JSearch) and Malaysia-specific demo data for Jobstreet & RiceBowl.
-4. **Match Analysis** — AI scores how well you match a job (0–100) with a breakdown by skills, experience, and education. Click "Full Report" for detailed advice.
+## Problem Statement
+
+Job seekers in Malaysia spend hours manually comparing their resumes to job listings without knowing if they are a good match before applying. This leads to wasted time, low response rates, and frustration. ResuMatch solves this by using AI to instantly analyse a candidate's resume, extract their profile, and score how well they match any job listing — giving users actionable insights before they even click apply.
 
 ---
 
 ## Project Structure
 
 ```
-resumatch/
-├── app.py                  ← Flask backend (resume parsing, job fetching, AI match)
-├── requirements.txt        ← Python dependencies
+AIC AI Marathon/
+├── app.py                  # Flask backend + Morpheus AI agent logic
+├── requirements.txt        # Python dependencies
+├── README.md               # This file
+├── uploads/                # Temporary upload folder (auto-created)
 ├── templates/
-│   └── index.html          ← Main UI (HTML)
-├── static/
-│   ├── css/style.css       ← All styling
-│   └── js/app.js           ← Frontend logic
-└── uploads/                ← Temp folder for resume uploads (auto-cleared)
+│   └── index.html          # Main frontend UI
+└── static/
+    ├── css/
+    │   └── style.css       # Styling
+    └── js/
+        └── app.js          # Frontend logic
 ```
 
 ---
 
-## Setup & Run
+## Tech Stack
 
-### Step 1 — Open VS Code, open the `resumatch` folder
+| Layer | Technology |
+|---|---|
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Python 3.12, Flask |
+| AI Engine | Morpheus AI — LLaMA 3.3-70B |
+| PDF Parsing | PyMuPDF, pdfplumber |
+| DOCX Parsing | python-docx |
 
-### Step 2 — Open terminal (Ctrl + `) and create virtual environment
-```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1
-```
-If you get a red error about scripts being disabled:
+---
+
+## User Manual
+
+### Setup Instructions
+
+#### Requirements
+- Python 3.10 or newer
+- VS Code
+- Windows (PowerShell)
+
+---
+
+#### Step 1 — Download and unzip the project
+
+1. Download the project file `AIC_AI_Marathon.zip`
+2. Right-click the ZIP file → **Extract All** → choose your destination folder
+
+---
+
+#### Step 2 — Open project in VS Code
+
+1. Open VS Code
+2. Click **File** → **Open Folder**
+3. Select the `AIC AI Marathon` folder
+
+---
+
+#### Step 3 — Open terminal
+
+1. On the top menu bar, click **Terminal**
+2. Click **New Terminal**
+
+---
+
+#### Step 4 — Allow script execution (one-time setup only)
+
+Run this command to allow PowerShell scripts to run on your PC:
+
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
-Then activate again.
 
-### Step 3 — Install dependencies
-```powershell
+---
+
+#### Step 5 — Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+---
+
+#### Step 6 — Activate the virtual environment
+
+```bash
+venv\Scripts\Activate.ps1
+```
+
+You will see `(venv)` appear at the start of your terminal line — this means it worked:
+
+```
+(venv) PS C:\Users\YourName\...\AIC AI Marathon>
+```
+
+> **Important:** Every time you close and reopen VS Code, you must run this activate command again before starting the app.
+
+---
+
+#### Step 7 — Install required libraries
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Step 4 — Run the app
-```powershell
+This downloads and installs all the Python packages the app needs (Flask, PyMuPDF, pdfplumber, etc.). Wait until it finishes — it may take 1–2 minutes.
+
+---
+
+#### Step 8 — Run the app
+
+```bash
 python app.py
 ```
 
-### Step 5 — Open browser
-Go to: **http://127.0.0.1:5000**
+You should see this output in the terminal:
+
+```
+====================================================
+  ResuMatch — AI-Powered Job Matching System
+  Powered by Morpheus AI (mor.org)
+  http://127.0.0.1:5000
+====================================================
+```
 
 ---
 
-## API Keys You Need
+#### Step 9 — Open in browser
 
-### 1. AI Engine Key (Required)
-Pick ONE of these — paste it in the top bar of the app:
+Open your web browser and go to:
 
-**Chutes.ai (recommended)**
-- Go to https://chutes.ai
-- Sign up → Settings → API Keys → Create
-- Key starts with `cpk_...`
+```
+http://127.0.0.1:5000
+```
 
-**Morpheus (mor.org)**
-- Go to https://app.mor.org
-- Sign up → API Keys → Generate
-- Key starts with `sk-...`
-
-### 2. RapidAPI Key (Optional — for real LinkedIn/Indeed jobs)
-- Go to https://rapidapi.com
-- Sign up (free)
-- Search for **"JSearch"** by OpenWeb Ninja
-- Subscribe to the free plan (100 requests/month)
-- Copy your `x-rapidapi-key`
-- Paste it in the "RapidAPI Key" field in the app
-
-> Without this key, only Jobstreet and RiceBowl (demo data) will load.
-> The demo data is realistic and works great for hackathon demos.
+Or hold **Ctrl** and click `http://127.0.0.1:5000` directly in the VS Code terminal.
 
 ---
 
-## How the AI Match Works
-- **Score view** (default): Overall score 0–100, sub-scores for skills/experience/education, matched vs missing skills
-- **Full Report** (click the button): Detailed AI-written analysis with strengths, gaps, recommendations, and interview tips
+### How to Use ResuMatch
+
+#### Step 1 — Upload your resume
+
+- Drag and drop your resume into the upload box, or click to browse
+- Supported formats: PDF, DOCX, TXT (max 5 MB)
+- Click **Analyse Resume** and wait 10–20 seconds for the AI to process it
+
+#### Step 2 — Review your profile and search for jobs
+
+- Your AI-extracted profile (name, skills, experience, education) will appear on the left
+- Select your preferred job platforms (Jobstreet, RiceBowl)
+- Adjust the job keywords if needed
+- Click **Search Jobs**
+
+#### Step 3 — Browse job listings
+
+- A list of matched job listings will appear
+- Jobs are ranked by relevance to your profile and keywords
+- Click **Analyse Match** on any job card to check your compatibility
+
+#### Step 4 — View your match analysis
+
+- **Score view** — see your overall match score (0–100) with a breakdown across Skills, Experience, and Education, plus a list of matched and missing skills
+- **Full Report** — click to get a detailed AI career coaching report covering your strengths, skill gaps, recommendations, and likely interview questions for that role
 
 ---
 
-## Supported File Formats
-| Format | Notes |
-|--------|-------|
-| PDF    | Best support — use text-based PDFs, not scanned images |
-| DOCX   | Microsoft Word documents |
-| TXT    | Plain text resumes |
+## Team
 
----
-
-## Notes for Hackathon Demo
-- Data resets on server restart (in-memory). Fine for demo.
-- Jobstreet & RiceBowl use realistic mock data (their APIs are not publicly available).
-- LinkedIn, Indeed, Glassdoor use real live data via JSearch (RapidAPI free tier).
-- You can switch between Chutes.ai and Morpheus engines at any time using the toggle in the top bar.
+| Name | 
+|---|
+| [Liew Hao Yue] |
+| [Low Ke Sin] | 
+| [Thor Xiwen] | 
