@@ -1,187 +1,112 @@
-# ResuMatch — AI-Powered Job Matching System
+# AI Hackathon (AIC)
 
-> Upload your resume. Get matched to jobs instantly using Morpheus AI.
+# Problem Statement
 
-Built for the **Build with AI Hackathon (AI Marathon)** · Powered by **Morpheus AI (LLaMA 3.3-70B)**
+![image.png](Images/image.png)
 
----
+# Project Structure
 
-## Problem Statement
+![image.png](Images/image%201.png)
 
-Job seekers in Malaysia spend hours manually comparing their resumes to job listings without knowing if they are a good match before applying. This leads to wasted time, low response rates, and frustration. ResuMatch solves this by using AI to instantly analyse a candidate's resume, extract their profile, and score how well they match any job listing — giving users actionable insights before they even click apply.
+# User Manual
 
----
+## For set up (using terminal command for setup_
 
-## Project Structure
+Install your python (Python 3.10 or newer recommended)
 
-```
-AIC AI Marathon/
-├── app.py                  # Flask backend + Morpheus AI agent logic
-├── requirements.txt        # Python dependencies
-├── README.md               # This file
-├── uploads/                # Temporary upload folder (auto-created)
-├── templates/
-│   └── index.html          # Main frontend UI
-└── static/
-    ├── css/
-    │   └── style.css       # Styling
-    └── js/
-        └── app.js          # Frontend logic
-```
+### Step 1: Download and unzip file
 
----
+1. download the project file (AIC_AI_Marathon.zip)
+2. Right click ZIP file → extract all → choose folder (see you download in which folder)
 
-## Tech Stack
+### Step 2: Open project VS code
 
-| Layer | Technology |
-|---|---|
-| Frontend | HTML, CSS, JavaScript |
-| Backend | Python 3.12, Flask |
-| AI Engine | Morpheus AI — LLaMA 3.3-70B |
-| PDF Parsing | PyMuPDF, pdfplumber |
-| DOCX Parsing | python-docx |
+1. Open VS code
+2. Click File → Open Folder
+3. Select Folder (AIC AI Marathon)
 
----
+### Step 3: Open terminal
 
-## User Manual
+1. On the top left corner of Vs Code, click 'Terminal'
+2. Click 'New Terminal'
 
-### Setup Instructions
+### Step 4: Allow script execution (one time setup)
 
-#### Requirements
-- Python 3.10 or newer
-- VS Code
-- Windows (PowerShell)
+Run this command to allow PowerShell scripts to run pc
 
----
-
-#### Step 1 — Download and unzip the project
-
-1. Download the project file `AIC_AI_Marathon.zip`
-2. Right-click the ZIP file → **Extract All** → choose your destination folder
-
----
-
-#### Step 2 — Open project in VS Code
-
-1. Open VS Code
-2. Click **File** → **Open Folder**
-3. Select the `AIC AI Marathon` folder
-
----
-
-#### Step 3 — Open terminal
-
-1. On the top menu bar, click **Terminal**
-2. Click **New Terminal**
-
----
-
-#### Step 4 — Allow script execution (one-time setup only)
-
-Run this command to allow PowerShell scripts to run on your PC:
-
-```powershell
+```python
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
----
+### Step 5: Create a virtual environment
 
-#### Step 5 — Create a virtual environment
-
-```bash
+```python
 python -m venv venv
 ```
 
----
+### Step 6: Activate virtual environment
 
-#### Step 6 — Activate the virtual environment
-
-```bash
+```python
 venv\Scripts\Activate.ps1
 ```
 
-You will see `(venv)` appear at the start of your terminal line — this means it worked:
+You will see (venv) appear at the head of your terminal line — this means it worked:
 
-```
 (venv) PS C:\Users\YourName\...\AIC AI Marathon>
-```
 
 > **Important:** Every time you close and reopen VS Code, you must run this activate command again before starting the app.
 
----
+### Step 7: Install Required Libraries
 
-#### Step 7 — Install required libraries
-
-```bash
+```python
 pip install -r requirements.txt
 ```
 
-This downloads and installs all the Python packages the app needs (Flask, PyMuPDF, pdfplumber, etc.). Wait until it finishes — it may take 1–2 minutes.
+This downloads and installs all the Python packages the app needs (Flask, pdfplumber, etc.). Wait until it finishes — it may take 1–2 minutes.
 
----
+### Step 8: Run the app
 
-#### Step 8 — Run the app
-
-```bash
+```python
 python app.py
 ```
 
-You should see this output in the terminal:
+You should see output:
 
-```
-====================================================
-  ResuMatch — AI-Powered Job Matching System
-  Powered by Morpheus AI (mor.org)
-  http://127.0.0.1:5000
-====================================================
+```python
+* Running on http://127.0.0.1:5000
+Press CTRL+C to quit
 ```
 
----
+### Step 9: open in browser
 
-#### Step 9 — Open in browser
+Open your web browser and go to
 
-Open your web browser and go to:
-
-```
+```python
 http://127.0.0.1:5000
 ```
 
-Or hold **Ctrl** and click `http://127.0.0.1:5000` directly in the VS Code terminal.
+Or hold on the Ctrl key and click on 'http://127.0.0.1:5000' in vs code terminal
 
----
+## How to use this AI job checker
 
-### How to Use ResuMatch
+![image.png](Images/image%202.png)
 
-#### Step 1 — Upload your resume
+1. Press/drop your Resume in this box
+2. After drop the resume, press "analysis resume"
 
-- Drag and drop your resume into the upload box, or click to browse
-- Supported formats: PDF, DOCX, TXT (max 5 MB)
-- Click **Analyse Resume** and wait 10–20 seconds for the AI to process it
+![image.png](Images/image%203.png)
 
-#### Step 2 — Review your profile and search for jobs
+1. The user can choose select platform that they wanted to find.
+2. After select completed, user can press "search jobs" into next page
 
-- Your AI-extracted profile (name, skills, experience, education) will appear on the left
-- Select your preferred job platforms (Jobstreet, RiceBowl)
-- Adjust the job keywords if needed
-- Click **Search Jobs**
+![image.png](Images/image%204.png)
 
-#### Step 3 — Browse job listings
+1. The jobs found page view show a list of available jobs for application
+2. The user can press "Analyze Match" to check it (will go to the next page)
 
-- A list of matched job listings will appear
-- Jobs are ranked by relevance to your profile and keywords
-- Click **Analyse Match** on any job card to check your compatibility
+![image.png](Images/image%205.png)
 
-#### Step 4 — View your match analysis
+![image.png](Images/image%206.png)
 
-- **Score view** — see your overall match score (0–100) with a breakdown across Skills, Experience, and Education, plus a list of matched and missing skills
-- **Full Report** — click to get a detailed AI career coaching report covering your strengths, skill gaps, recommendations, and likely interview questions for that role
-
----
-
-## Team
-
-| Name | 
-|---|
-| Liew Hao Yue |
-| Low Ke Sin | 
-| Thor Xiwen | 
+1. User can check whether the job is suitable to his/her field
+2. User can read the full report whether the user is match with this job or not
