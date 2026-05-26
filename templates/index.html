@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ResuMatch — AI Job Matching</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-mark">R</div>
+    ResuMatch
+    <span class="logo-sub">AI-Powered Job Matching</span>
+  </div>
+  <div class="ai-engine-badge">
+    <span class="engine-dot"></span>
+    Powered by <strong>Morpheus AI</strong>
+  </div>
+</header>
+
+<!-- STEP PROGRESS -->
+<div class="steps-bar">
+  <div class="step active" id="step-1">
+    <div class="step-num">1</div>
+    <div class="step-label">Upload Resume</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step" id="step-2">
+    <div class="step-num">2</div>
+    <div class="step-label">Your Profile</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step" id="step-3">
+    <div class="step-num">3</div>
+    <div class="step-label">Browse Jobs</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step" id="step-4">
+    <div class="step-num">4</div>
+    <div class="step-label">Match Analysis</div>
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- ═══ STEP 1: UPLOAD ══════════════════════════════════════════════════ -->
+  <section class="page active" id="page-upload">
+    <div class="page-center">
+      <h1 class="page-title">Upload Your Resume</h1>
+      <p class="page-sub">We'll analyse it and find jobs that match your profile</p>
+
+      <div class="upload-card" id="drop-zone">
+        <div class="upload-icon">📄</div>
+        <p class="upload-heading">Drag &amp; drop your resume here</p>
+        <p class="upload-hint">or click to browse</p>
+        <p class="upload-formats">PDF · DOCX · TXT &nbsp;·&nbsp; Max 5 MB</p>
+        <input type="file" id="file-input" accept=".pdf,.docx,.txt" style="display:none"/>
+      </div>
+
+      <div id="file-chosen" class="file-chosen" style="display:none">
+        <span class="file-icon">📎</span>
+        <span id="file-chosen-name">file.pdf</span>
+        <button class="remove-file" id="remove-file">✕</button>
+      </div>
+
+      <div class="upload-actions">
+        <button class="btn primary large" id="btn-parse-resume" disabled>
+          Analyse Resume ↗
+        </button>
+      </div>
+
+      <div class="loader" id="upload-loader">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <span id="upload-loader-text">Reading resume...</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 2: PROFILE ═════════════════════════════════════════════════ -->
+  <section class="page" id="page-profile">
+    <div class="profile-layout">
+
+      <div class="profile-card" id="profile-card">
+        <!-- Filled by JS -->
+      </div>
+
+      <div class="profile-right">
+        <h2 class="section-title">Search for Jobs</h2>
+        <p class="section-sub">Adjust keywords and select job platforms to search</p>
+
+        <div class="form-group">
+          <label>Job Keywords</label>
+          <input type="text" id="search-query" placeholder="e.g. Software Engineer, Data Scientist"/>
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" id="search-location" placeholder="e.g. Kuala Lumpur, Malaysia" value="Kuala Lumpur, Malaysia"/>
+        </div>
+
+        <div class="form-group">
+          <label>Select Platforms</label>
+          <div class="platform-grid">
+            <label class="platform-toggle checked" data-platform="jobstreet">
+              <input type="checkbox" value="jobstreet" checked/>
+              <div class="platform-box">
+                <span class="platform-dot dot-jobstreet"></span>
+                Jobstreet
+              </div>
+            </label>
+            <label class="platform-toggle checked" data-platform="ricebowl">
+              <input type="checkbox" value="ricebowl" checked/>
+              <div class="platform-box">
+                <span class="platform-dot dot-ricebowl"></span>
+                RiceBowl
+              </div>
+            </label>
+            <label class="platform-toggle checked" data-platform="linkedin">
+              <input type="checkbox" value="linkedin" checked/>
+              <div class="platform-box">
+                <span class="platform-dot dot-linkedin"></span>
+                LinkedIn
+              </div>
+            </label>
+            <label class="platform-toggle checked" data-platform="indeed">
+              <input type="checkbox" value="indeed" checked/>
+              <div class="platform-box">
+                <span class="platform-dot dot-indeed"></span>
+                Indeed
+              </div>
+            </label>
+            <label class="platform-toggle checked" data-platform="glassdoor">
+              <input type="checkbox" value="glassdoor" checked/>
+              <div class="platform-box">
+                <span class="platform-dot dot-glassdoor"></span>
+                Glassdoor
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn primary large full-width" id="btn-search-jobs">
+          Search Jobs →
+        </button>
+
+        <div class="loader" id="jobs-loader" style="margin-top:1rem">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span>Fetching jobs...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 3: JOB LISTINGS ════════════════════════════════════════════ -->
+  <section class="page" id="page-jobs">
+    <div class="jobs-header">
+      <div>
+        <h2 class="section-title" id="jobs-title">Jobs Found</h2>
+        <p class="section-sub" id="jobs-sub"></p>
+      </div>
+      <div class="jobs-controls">
+        <div class="platform-filter" id="platform-filter"></div>
+        <button class="btn secondary" id="btn-back-profile">← Change Search</button>
+      </div>
+    </div>
+    <div id="job-grid" class="job-grid"></div>
+  </section>
+
+  <!-- ═══ STEP 4: MATCH ANALYSIS ══════════════════════════════════════════ -->
+  <section class="page" id="page-match">
+    <div class="match-header">
+      <button class="btn secondary" id="btn-back-jobs">← Back to Jobs</button>
+      <h2 class="section-title" id="match-job-title">Match Analysis</h2>
+      <div class="match-mode-toggle">
+        <button class="mode-btn active" id="mode-score" data-mode="score">Score</button>
+        <button class="mode-btn" id="mode-report" data-mode="report">Full Report</button>
+      </div>
+    </div>
+
+    <div class="match-layout">
+      <div class="match-job-info" id="match-job-info"></div>
+
+      <div class="match-result-area">
+        <div class="loader" id="match-loader">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <span id="match-loader-text">Analysing match...</span>
+        </div>
+
+        <!-- Score view -->
+        <div id="score-view" style="display:none">
+          <div class="score-hero">
+            <svg class="score-ring" viewBox="0 0 120 120">
+              <circle class="ring-bg" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52"
+                stroke-dasharray="327" stroke-dashoffset="327"/>
+            </svg>
+            <div class="score-center">
+              <div class="score-num" id="score-num">0</div>
+              <div class="score-lbl">/ 100</div>
+            </div>
+          </div>
+          <div class="score-verdict" id="score-verdict"></div>
+          <div class="score-oneliner" id="score-oneliner"></div>
+
+          <div class="subscores">
+            <div class="subscore-item">
+              <div class="subscore-label">Skills</div>
+              <div class="subscore-bar"><div class="subscore-fill" id="bar-skills"></div></div>
+              <div class="subscore-val" id="val-skills">–</div>
+            </div>
+            <div class="subscore-item">
+              <div class="subscore-label">Experience</div>
+              <div class="subscore-bar"><div class="subscore-fill" id="bar-exp"></div></div>
+              <div class="subscore-val" id="val-exp">–</div>
+            </div>
+            <div class="subscore-item">
+              <div class="subscore-label">Education</div>
+              <div class="subscore-bar"><div class="subscore-fill" id="bar-edu"></div></div>
+              <div class="subscore-val" id="val-edu">–</div>
+            </div>
+          </div>
+
+          <div class="skills-section">
+            <div class="skills-col">
+              <p class="skills-col-title matched">✓ Matched Skills</p>
+              <div id="matched-skills"></div>
+            </div>
+            <div class="skills-col">
+              <p class="skills-col-title missing">✗ Missing Skills</p>
+              <div id="missing-skills"></div>
+            </div>
+          </div>
+
+          <div style="text-align:center;margin-top:1.5rem">
+            <button class="btn primary" id="btn-view-report">View Full Report →</button>
+          </div>
+        </div>
+
+        <!-- Report view -->
+        <div id="report-view" class="report-box" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
